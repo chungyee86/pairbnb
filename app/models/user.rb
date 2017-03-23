@@ -4,15 +4,11 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   has_many :authentications, :dependent => :destroy
 
-  def self.create_with_auth_and_hash(authentication,auth_hash)
-    create! do |u|
-      #u.first_name = auth_hash["info"]["first_name"]
-      # u.last_name = auth_hash["info"]["last_name"]
-      # u.friendly_name = auth_hash["info"]["name"]
-      u.email = auth_hash["extra"]["raw_info"]["email"]
-      u.password = SecureRandom.hex(6)
-      u.authentications<<(authentication)
-    end
+  def self.create_with_auth_and_hash(authentication, auth_hash)
+    # byebug
+      user = User.create!(first_name: auth_hash["extra"]["raw_info"]["name"].split(" ")[0], last_name: auth_hash["extra"]["raw_info"]["name"].split(" ")[1], email: auth_hash["extra"]["raw_info"]["email"])
+      user.authentications << (authentication)
+      return user
   end
 
   def fb_token
@@ -24,5 +20,6 @@ class User < ApplicationRecord
   #   true
   # end
 
-  include Clearance::User
+  # include Clearance::User
+
 end
