@@ -1,37 +1,46 @@
 class UsersController < ApplicationController
-  def show
-    @show_user = User.find(params[:id])
-    @show_user
-  end
 
   def index
-    @all_users = User.all
+    @users = User.all
   end
 
-  def new
-    @user = User.new
-  end
-
-  def create
-    @user = User.new
-    if @user.save
-      redirect_to @url
-    else
-      'new'
-    end
+  def show
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
-  def update
+  # def create
+  #   @user = User.new
+  #   if @user.save
+  #     redirect_to @url
+  #   else
+  #     'new'
+  #   end
+  # end
 
+  def update
+    if @user.update(user_params)
+      flash[:success] = "Successfully user update"
+      redirect_to @user
+    else
+      flash[:danger] = "Error updating user"
+      render "edit"
+    end
   end
 
   def delete
-    @delete_user = User.find(params[:id])
-    @delete_user.destroy
+    @user.destroy
     redirect_to 'root'
+  end
+
+  private
+
+  def find_user
+    @user = User.all(params[:id])
+  end
+
+  def user_params
+    params.require(:user).permit(:first_name, :last_name, :email)
   end
 end
