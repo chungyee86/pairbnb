@@ -1,0 +1,14 @@
+<h1>My Listing</h1>
+
+<p><%= @listing.name %></p><br>
+<p><%= @listing.location %></p><br>
+<p><%= @listing.state %></p><br>
+<p><%= @listing.country %></p><br>
+<p><%= @listing.price %></p><br>
+<p><%= @listing.description %></p><br>
+<p><%= @listing.room_type %></p><br>
+<p><%= @listing.no_of_guest %></p><br>
+<p><%= @listing.location %></p><br>
+
+<%= link_to 'Edit My Listing', edit_user_listing_path(@listing.user) %>
+<%= link_to 'Back', user_listings_path %>

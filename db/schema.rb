@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170323031340) do
     t.datetime "updated_at",  null: false
     t.string   "state"
     t.string   "country"
+    t.string   "name"
     t.index ["user_id"], name: "index_listings_on_user_id", using: :btree
   end
 

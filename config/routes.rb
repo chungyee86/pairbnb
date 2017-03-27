@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   #
   # get 'users/show'
 
-  root 'welcome#index'
+  root 'welcome#index', as: 'home'
 
   #*** rails g clearance:routes show all these default Clearance routes
   resources :passwords, controller: "clearance/passwords", only: [:create, :new]
@@ -39,4 +39,7 @@ Rails.application.routes.draw do
     resources :listings
   end
 
+  get "/users/new" => "users#new", as: "new"
+  get "/users/:user_id/listings" => "listings#index"
+  
 end
