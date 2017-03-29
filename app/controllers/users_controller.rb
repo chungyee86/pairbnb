@@ -6,6 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @reservations = current_user.reservations
   end
 
   def edit

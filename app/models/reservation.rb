@@ -3,6 +3,8 @@ class Reservation < ApplicationRecord
   belongs_to :listing
   validates :check_overlapping_dates
   validates :check_max_guests
+  # validate num_guests is not negative
+  # validate check_in date should be after today
 
   def check_overlapping_dates
   	# compare this new reservation againsts existing reservations
@@ -22,5 +24,12 @@ class Reservation < ApplicationRecord
   	return if num_guests < no_of_guest
   	errors.add(:max_guests, "Max guests number exceeded!")
   end
+
+  def total_price
+  	price = listing.price
+  	num_dates = (check_in..check_out).to_a.length
+  	return price * num_dates
+  end
+
 
 end

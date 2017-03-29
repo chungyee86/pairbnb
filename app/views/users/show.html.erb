@@ -37,3 +37,25 @@
   </div>
 </div>
 <% end %>
+
+<h2>Resevations</h2>
+<table>
+    <tr>
+      <th>Listing Name</th>
+      <th>Check In</th>
+      <th>Check Out</th>
+      <th>Total Price</th>
+      <th>Action</th>
+    </tr>
+
+  <% @reservations.each do |reservation| %>
+    <tr>
+      <td><%= link_to reservation.listing.name, reservation.listing %> </td>
+      <td><%= reservation.check_in.strftime('%d %B %Y') %></td> 
+      <td><%= reservation.check_out.strftime('%d %B %Y') %></td>
+      <td><%= reservation.num_guests %></td>
+      <td><%= reservation.total_price %></td>
+      <td><%= link_to "Cancel Resevation", reservation, method: :delete, date: {confirmation: "Are you sure to cancel reservation?"}, class="btn btn-danger" %></td>
+    </tr>
+  <% end %>
+</table>
