@@ -1,0 +1,37 @@
+
+<h1>My Listing</h1>
+	<% @listing.photos.each do |photo| %>
+		<center><%= image_tag photo %></center>
+	<% end %>
+
+<body>
+	<div>
+		<p align="center"><b>Name: </b><%= @listing.name %></p><br>
+		<p align="center"><b>Location: </b><%= @listing.location %></p><br>
+		<p align="center"><b>State: </b><%= @listing.state %></p><br>
+		<p align="center"><b>Country: </b><%= @listing.country %></p><br>
+		<p align="center"><b>Price : </b>RM <%= @listing.price %></p><br>
+		<p align="center"><b>Description: </b><%= @listing.description %></p><br>
+		<p align="center"><b>Room Type: </b><%= @listing.room_type %></p><br>
+		<p align="center"><b>No. of Guest(s): </b><%= @listing.no_of_guest %></p><br>
+	</div>
+</body>
+
+<div>
+	<% if current_user == @user %>	
+		<%= link_to 'Edit My Listing', edit_user_listing_path(@listing.user), class: "btn btn-default" %>
+	<% end %>
+		<center><%= link_to 'Back', user_listings_path, class: "btn btn-primary" %></center>
+</div>
+
+
+<%= form_for [@listing, @reservation] do |f| %>
+	<% if @reservation.errors.any? %>
+		<% @reservation.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger"><%= msg %></div>
+		<% end %>
+	<% end %>
+<%= render partial: "reservations/form", locals: {f: f}%>
+
+<%= f.submit({:class => 'btn btn-primary'}) %>
+<% end %>

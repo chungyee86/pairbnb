@@ -1,0 +1,13 @@
+<% if current_user.customer? %>
+<p> You cannot see this page </p>
+<% else %>
+<table>
+	<% @users.each do |user| %>
+	<tr>
+		<td><p><%= link_to user.first_name, user %></p></td>
+		<td><p><%= user.email, user %></p></td>
+	</tr>
+</table>
+
+<% end %>
+<% end %>

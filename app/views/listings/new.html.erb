@@ -1,0 +1,11 @@
+<h1>Add Listing</h1>
+<%= form_for [current_user, @listing] do |f| %>
+	<% if @listing.errors.any? %>
+		<% @listing.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger"><%= msg %></div>
+		<% end %>
+	<% end %>
+  <%= render partial: "form", locals: {f: f}%>
+
+  <%= f.submit({:class => 'btn btn-primary'}) %>
+<% end %>

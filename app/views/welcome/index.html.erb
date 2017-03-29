@@ -1,0 +1,11 @@
+<h1>PairBnB</h1>
+
+<% if current_user != nil %>
+	<p> Email: <%= current_user.email %> </p>
+<% end %>
+
+<%= link_to "Sign in with Facebook", "/auth/facebook" %><br>
+<% if signed_in? %>
+  <%= link_to "All Listing", user_listings_path(current_user) %>
+<% end %>
+ 
