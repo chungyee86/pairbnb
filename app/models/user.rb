@@ -1,9 +1,14 @@
 class User < ApplicationRecord
   include Clearance::User
 
+  enum role: ["Customer", "Moderator", "Superadmin"]
+
   validates :email, uniqueness: true
   has_many :authentications, :dependent => :destroy
   has_many :listings, :dependent => :destroy
+  has_many :listings, :dependent => :destroy
+
+  mount_uploaders :avatars, AvatarsUploader
 
   def self.create_with_auth_and_hash(authentication, auth_hash)
     # byebug

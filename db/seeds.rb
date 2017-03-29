@@ -30,7 +30,7 @@ uids = []
 User.all.each { |u| uids << u.id }
 
 ActiveRecord::Base.transaction do
-  40.times do
+  50.times do
     # listing['place_type'] = rand(1..3)
     # listing['city'] = Faker::Address.city
     # listing['zipcode'] = Faker::Address.zip_code
@@ -42,7 +42,7 @@ ActiveRecord::Base.transaction do
     listing['country'] = Faker::Address.country
     listing['price'] = rand(80..500)
     listing['description'] = Faker::Hipster.sentence
-    listing['room_type'] = ["entire home", "private home", "shared room"].sample
+    listing['room_type'] = ["Entire home", "Private home", "Shared room"].sample
     listing['no_of_guest'] = rand(1..10)
     listing['user_id'] = uids.sample
     listing['start_date'] = Faker::Date.between(2.days.ago, Date.today)

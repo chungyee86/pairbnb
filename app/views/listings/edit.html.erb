@@ -3,6 +3,9 @@
 <%= render partial: 'form', locals: {f: f}  %>
 <%= f.submit "Submit" %>
 <% end %>
+
+
+
 <br>
 <%= link_to 'Back', user_listing_path(@listing.user) %>
 <%= link_to "Delete", user_listing_path(@user, @listing), method: :delete, data: {confirm: "Are you sure you want to delete?"} %>

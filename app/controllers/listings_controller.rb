@@ -16,6 +16,18 @@ class ListingsController < ApplicationController
   # byebug
   def new
     @listing = @user.listings.new
+    # byebug
+    # authorization code
+    if @user.customer?
+      flash[:notice] = "Sorry. You are not allowed to perform this action."
+      return redirect_to user_listings_path(current_user), notice: "Sorry. You do not have the permission to verify a property."
+    end
+    # end authorization code
+
+    # other code to make the new action work!
+
+    # allowed?(action: <replace with your action>, user: current_user)
+
   end
 
   def create
@@ -29,6 +41,7 @@ class ListingsController < ApplicationController
   end
 
   def show
+    @reservation = @listing.reservations.new
   end
 
   def edit
@@ -52,7 +65,7 @@ class ListingsController < ApplicationController
   private
 
   def listing_params
-    params.require(:listing).permit(:location, :state, :country, :price ,:description, :room_type, :no_of_guest)
+    params.require(:listing).permit(:name, :location, :state, :country, :price ,:description, :room_type, :no_of_guest, photos:[])
   end
 
   def find_user

@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-
+  before_action :find_user, only: [:show, :edit, :update, :destroy]
+  
   def index
     @users = User.all
   end
@@ -10,14 +11,15 @@ class UsersController < ApplicationController
   def edit
   end
 
-  # def create
-  #   @user = User.new
-  #   if @user.save
-  #     redirect_to @url
-  #   else
-  #     'new'
-  #   end
-  # end
+  def create 
+    @user = User.new(user_params)
+    if @user.save
+      sign_in @user
+      redirect_to @user
+    else
+      render 'new'
+    end
+  end
 
   def update
     if @user.update(user_params)
@@ -37,10 +39,10 @@ class UsersController < ApplicationController
   private
 
   def find_user
-    @user = User.all(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email)
+    params.require(:user).permit(:first_name, :last_name, :email, :gender, :phone, :birthdate, avatars:[])
   end
 end
