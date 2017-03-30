@@ -25,13 +25,13 @@
 </div>
 
 
-<%= form_for [@listing, @reservation] do |f| %>
+<%= form_for [@user, @listing, @reservation] do |f| %>
 	<% if @reservation.errors.any? %>
 		<% @reservation.errors.full_messages.each do |msg| %>
 			<div class="alert alert-danger"><%= msg %></div>
 		<% end %>
 	<% end %>
-<%= render partial: "reservations/form", locals: {f: f}%>
+<%= render partial: "reservations/form", locals: {f: f} %>
 
 <%= f.submit({:class => 'btn btn-primary'}) %>
 <% end %>

@@ -1,8 +1,8 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :listing
-  validates :check_overlapping_dates
-  validates :check_max_guests
+  validate :check_overlapping_dates
+  validate :check_max_guests
   # validate num_guests is not negative
   # validate check_in date should be after today
 
@@ -16,12 +16,13 @@ class Reservation < ApplicationRecord
   end
 
   def overlap?(x, y)
+  	# byebug
   	(x.check_in - y.check_out) * (y.check_in - x.check_out) > 0
   end
 
   def check_max_guests
   	max_guests = listing.no_of_guest
-  	return if num_guests < no_of_guest
+  	return if num_guests < max_guests
   	errors.add(:max_guests, "Max guests number exceeded!")
   end
 

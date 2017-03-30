@@ -18,7 +18,7 @@ class ListingsController < ApplicationController
     @listing = @user.listings.new
     # byebug
     # authorization code
-    if @user.customer?
+    if @user.Customer?
       flash[:notice] = "Sorry. You are not allowed to perform this action."
       return redirect_to user_listings_path(current_user), notice: "Sorry. You do not have the permission to verify a property."
     end
@@ -41,6 +41,7 @@ class ListingsController < ApplicationController
   end
 
   def show
+    # @listing = Listing.find(params[:id])
     @reservation = @listing.reservations.new
   end
 

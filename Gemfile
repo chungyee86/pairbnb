@@ -60,3 +60,5 @@ gem 'figaro'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'braintree'
+
