@@ -1,10 +1,19 @@
-
 <!DOCTYPE html>
 <html>
 <head>
   <%= javascript_include_tag 'application' %>
   <%= stylesheet_link_tag 'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css' %>
   <%= csrf_meta_tag %>
+  <script src="https://js.braintreegateway.com/v2/braintree.js"></script>
+  <script src="https://js.braintreegateway.com/js/braintree-2.22.2.min.js"></script>
+
+  <script src="https://js.braintreegateway.com/web/3.6.3/js/client.min.js"></script>
+  <script src="https://js.braintreegateway.com/web/3.6.3/js/hosted-fields.min.js"></script>
+<!--   <script>
+   braintree.setup("<%=@client_token%>", "dropin", {
+     container: "dropin"
+   });
+  </script> -->
 </head>
 <body>
   <nav class="navbar navbar-inverse">

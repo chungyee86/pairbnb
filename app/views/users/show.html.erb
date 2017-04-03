@@ -44,8 +44,10 @@
       <th>Listing Name</th>
       <th>Check In</th>
       <th>Check Out</th>
+      <th>Num. of Guests</th>
       <th>Total Price</th>
       <th>Action</th>
+      <th>To Pay</th>
     </tr>
 
   <% @reservations.each do |reservation| %>
@@ -54,8 +56,9 @@
       <td><%= reservation.check_in.strftime('%d %B %Y') %></td> 
       <td><%= reservation.check_out.strftime('%d %B %Y') %></td>
       <td><%= reservation.num_guests %></td>
-      <td><%= reservation.total_price %></td>
+      <td><%= reservation.total_sum %></td>
       <td><%= link_to "Cancel Reservation", reservation_path(reservation), method: :delete, date: {confirmation: "Are you sure to cancel reservation?"}, class: "btn btn-danger" %></td>
+      <td><%= link_to "Pay", new_payment_path + "?id=" + reservation.id.to_s, class: "btn btn-primary" %></td>
     </tr>
   <% end %>
 </table>

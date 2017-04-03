@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'braintree/new'
+
+  get 'payments/new'
+
+  get 'welcome/index'
+
   # resources :passwords, controller: "clearance/passwords", only: [:create, :new]
   # resource :session, controller: "clearance/sessions", only: [:create]
   #
@@ -41,8 +47,9 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :reservations, only: [:show, :destroy]
 
-  resources :reservations, only: [:destroy]
+  resources :payments, only: [:new, :create]
 
   get "/users/new" => "users#new", as: "new"
   get "/users/:user_id/listings" => "listings#index"
