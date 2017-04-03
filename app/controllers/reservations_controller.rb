@@ -6,6 +6,9 @@ class ReservationsController < ApplicationController
 		@reservation = current_user.reservations.new(reservation_params)
 		@reservation.listing = @listing
 		if @reservation.save
+			ReservationMailer.notification_email(current_user.email, @listing.user, @reservation.listing.id, @reservation.id).deliver_now
+    		# ReservationMailer to send a notification email after save
+    		# ReservationJob.perform_later(current_user.email, @host, @reservation.listing.id, @reservation.id)
 			flash[:notice] = "Successful reservation!"
 			redirect_to current_user
 			# byebug

@@ -1,9 +1,9 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :listing
-  validate :check_overlapping_dates
-  validate :check_max_guests
   has_one :payment
+  # validate :check_overlapping_dates
+  # validate :check_max_guests
   # validate num_guests is not negative
   # validate check_in date should be after today
 
