@@ -51,7 +51,7 @@ group :development do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+# gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'clearance'
 gem 'omniauth'
@@ -60,3 +60,8 @@ gem 'figaro'
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'mini_magick'
 gem 'fog'
+gem 'braintree'
+gem "letter_opener", :group => :development
+gem 'sidekiq'
+# gem 'redis-server'
+
