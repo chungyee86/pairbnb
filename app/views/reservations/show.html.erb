@@ -1,0 +1,23 @@
+<h3>Your Reservation</h3>
+
+<ul class="list-group">
+  <li class="list-group-item">
+    <p>Listing name: <%= @reservation.listing.name %></p>
+    <p>No. of Guest: <%= @reservation.num_guests%> </p>
+    <p>Location: <%= @reservation.listing.location %> </p>
+    <p>Check-in Date: <%= @reservation.check_in %></p>
+
+    <p>Check-out Date: <%= @reservation.check_out %></p>
+
+    <strong>Payment Status:</strong>
+      <% if @reservation.payment.nil? %>
+      <span class="btn btn-danger"> NOT PAID </span>
+
+       <%= link_to 'Pay Now' , new_payment_path + "?id=" + reservation.id.to_s, class: "btn btn-warning"  %>
+      <% else %>
+      <span class="btn btn-success">PAID</span>
+      <% end %>
+  </li>
+</ul>
+
+<%= link_to 'Back' , user_path(current_user), class: "btn btn-primary" %>
