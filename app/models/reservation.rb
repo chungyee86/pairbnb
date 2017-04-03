@@ -1,6 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :user
   belongs_to :listing
+  has_one :payment
   # validate :check_overlapping_dates
   # validate :check_max_guests
   # validate num_guests is not negative
@@ -26,9 +27,10 @@ class Reservation < ApplicationRecord
   	errors.add(:max_guests, "Max guests number exceeded!")
   end
 
-  def total_price
-  	price = listing.price
-  	num_dates = (check_in..check_out).to_a.length
+  def total_sum
+  	price = self.listing.price
+  	num_dates = (self.check_in..self.check_out).to_a.length
+    # byebug
   	return price * num_dates
   end
 

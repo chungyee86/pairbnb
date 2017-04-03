@@ -24,6 +24,16 @@ class ReservationsController < ApplicationController
 		redirect_to @reservation.user
 	end
 
+	def show
+		@reservation = Reservation.find(params[:id])
+		@listing = @reservation.listing
+		@user = User.find(params[:id])
+	end
+
+	def total_sum
+		(self.check_out - self.check_in).to_i * self.listing.price
+	end
+
 	private
 
 	def reservation_params
