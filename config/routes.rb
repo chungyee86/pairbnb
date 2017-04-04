@@ -47,5 +47,7 @@ Rails.application.routes.draw do
 
   get "/users/new" => "users#new", as: "new"
   get "/users/:user_id/listings" => "listings#index"
+
+  get '/search', to: 'listings#search', as: 'search'
   
 end

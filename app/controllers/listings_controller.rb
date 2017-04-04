@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
 
-  before_action :find_user, except: [:index]
+  before_action :find_user, except: [:index, :search]
   before_action :find_listing, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -63,12 +63,24 @@ class ListingsController < ApplicationController
     redirect_to user_listings_path(@user)
   end
 
+  def search
+    # byebug
+    @listings = Listing.search(params[:term], fields: ["name", "location"], misspellings: {below: 5})
+    if @listings.blank?
+      redirect_to listings_path, flash:{danger: "no successful search result"}
+    else
+      @counter ||= 0 unless @counter
+      render :index
+    end
+  end
+
   private
 
   def listing_params
     params.require(:listing).permit(:name, :location, :state, :country, :price ,:description, :room_type, :no_of_guest, photos:[])
   end
 
+  # byebug
   def find_user
     @user = User.find(params[:user_id])
   end
