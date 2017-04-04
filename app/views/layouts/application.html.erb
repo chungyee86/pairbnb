@@ -14,6 +14,7 @@
      container: "dropin"
    });
   </script> -->
+      <!-- beginning of search form -->
 </head>
 <body>
   <nav class="navbar navbar-inverse">
@@ -37,6 +38,17 @@
         <li><%= link_to "All Listing", user_listings_path(current_user) %></li>
         <% end %>
       </ul>
+
+      <div class="search">
+        <%= form_tag search_path(user_id: current_user.id), method: "get", class: "navbar-form navbar-left" do |f| %>
+          <%= text_field_tag :term, params[:term],placeholder:"Where do you wanna go?" %>
+          <%= submit_tag 'Search', class: 'btn btn-primary' %>
+          <!-- end of search form -->
+        <% end %>
+        <!-- end of search div -->
+      </div>
+
+
       <ul class="nav navbar-nav navbar-right">
         <% if signed_in? -%>
             <li><%= link_to "Profile", user_path(current_user) %></li>
